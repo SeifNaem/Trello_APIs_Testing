@@ -2,7 +2,7 @@
 End-to-End Scenario for Trello APIs (Automated in Postman)
 
 This end-to-end scenario verifies the full lifecycle of Trello objects using REST APIs. It covers creating, updating, and deleting workspaces, boards, lists, cards, and checklists. After every operation, a GET request is issued to verify that the action was successful.
-The whole flow is automated using Postman scripts and environment variables.
+The whole flow is automated using Postman scripts and collection variables.
 
 # Scenario Steps
 
