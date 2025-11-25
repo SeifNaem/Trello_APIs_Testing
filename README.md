@@ -96,7 +96,7 @@ Pre-request Scripts to generate authentication variables.
 
 Environment Variables for dynamic IDs (workspaceId, listId, cardId, checklistId).
 
-#Test Scripts to:
+# Test Scripts to:
 
 Validate response data.
 
