@@ -7,76 +7,102 @@ The whole flow is automated using Postman scripts and environment variables.
 # Scenario Steps
 
 # 1. Create a Workspace
-    Send a POST request to create a new Trello workspace.
-    Validate response status 200/201.
-    Extract the created "workspaceId" and store it in collection variables.
+ Send a POST request to create a new Trello workspace.
+ 
+ Validate response status 200.
+ 
+ Extract the created "workspaceId" and store it in collection variables.    
 
-# 2. Create a Board
+ GET workspace by ID to verify creation.
+
+# 2. Create a Board inside the Workspace
+
+POST to create a board associated with the workspace.
+
+Validate response status 200 and extract "boardId".
+
+GET the board to confirm it was created.
 
 # 3. Create a List
 
-Send a POST request to create a list inside the previously created workspace (via board ID if required).
+POST to create a list on the created board.
 
-Validate status code.
+Extract listId.
 
-Save the listId for next operations.
+GET the list to ensure it exists and is linked to the correct board.
 
-Create a Card
+# 4. Create a Card
 
-Use a POST request to create a card inside the created list.
+POST to create a new card under the selected list.
 
-Validate response and extract cardId.
+Extract cardId.
 
-Create a Checklist
+GET the card to validate successful creation.
 
-Use a POST request to add a checklist to the created card.
+# 5. Create a Checklist
 
-Validate success and save the checklist.
+POST to add a checklist to the created card.
 
-Update Workspace Name
+Extract checklistId.
 
-Send a PUT request to update the workspace name.
+GET the checklist to verify creation.
 
-Verify updated details and response body.
+# 6. Update Workspace Name
 
-Update List Name
+PUT request to update the workspace name.
 
-Use a PUT request to rename the list.
+GET the workspace to confirm the update.
 
-Ensure the list name is updated correctly.
+# 7. Update List Name
 
-Update Card Name
+PUT to rename the board.
 
-Send a PUT request to modify the card name.
+GET the board to verify the new name.
 
-Validate that the card name has been changed successfully.
+# 8. Update Card Name
 
-Delete the Card
+PUT request to change the list name.
 
-Send a DELETE request using the cardId.
+GET list to confirm it was updated successfully.
 
-Confirm deletion with response code 200 and optional GET to verify it's removed.
+# 9. Delete the checklist
 
-Delete the List / Workspace (Optional Cleanup)
+DELETE request to remove the checklist.
 
-Delete remaining objects to keep environment clean.
+GET the checklist to confirm deletion and status code 404.
 
-Postman Automation
+# 10. Delete the card
 
-The entire workflow is automated using Postman Collections with:
+DELETE request to remove the card.
+
+GET the card to confirm deletion and status code 404.
+
+# 11. Delete the board
+
+DELETE request to remove the board.
+
+GET the board to confirm deletion and status code 404.
+
+# 11. Delete the workspace
+
+DELETE request to remove the board.
+
+GET the board to confirm deletion and status code 404.
+
+
+# The entire workflow is automated using Postman Collections with:
 
 Pre-request Scripts to generate authentication variables.
 
 Environment Variables for dynamic IDs (workspaceId, listId, cardId, checklistId).
 
-Test Scripts to:
+#Test Scripts to:
 
-Validate response schema.
+Validate response data.
 
 Extract and store IDs automatically.
 
 Check status codes and response messages.
 
-Collection Runner to execute the full scenario as a single automated pipeline.
+Collection Runner to execute the full scenario automatically.
 
-Optional: Newman to run the scenario in CI/CD for continuous API testing.
